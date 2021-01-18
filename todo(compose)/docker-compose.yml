@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+ app:
+  image: tkxkd0159/package_test:1.0
+  ports:
+   - target: 3000
+     published: 3002
+     protocol: tcp
+     mode: host
+  environment:
+   MYSQL_HOST: mydb
+   MYSQL_USER: root
+   MYSQL_PASSWORD: secret
+   MYSQL_DB: todos2
+ mydb:
+  image: mysql:5.7
+  volumes:
+   - todo-testbed:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: secret
+   MYSQL_DATABASE: todos2
+
+volumes:
+  todo-testbed:           # 선언되있지 않은 volume 선언해주는 라인
